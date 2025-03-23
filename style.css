@@ -12,6 +12,7 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
+    display: none; /* 初期状態で非表示 */
 }
 button#enableGyro {
     position: absolute;
