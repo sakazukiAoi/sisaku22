@@ -7,7 +7,7 @@ function preload() {
 function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('canvas-container');
-    window.addEventListener('deviceorientation', handleGyro);
+    document.getElementById('canvas-container').style.display = 'none'; // 初期状態で非表示
 }
 function handleGyro(event) {
     let hueVal = map(event.gamma, -45, 45, 180, 300, true); // 色相変化を抑える
@@ -17,6 +17,7 @@ function handleGyro(event) {
     image(imgA, 0, 0, width, height); // 穴あき絵を前面に描画
 }
 document.getElementById('enableGyro').addEventListener('click', function() {
+    document.getElementById('canvas-container').style.display = 'block'; // ボタン押下で表示
     if (typeof DeviceOrientationEvent.requestPermission === 'function') {
         DeviceOrientationEvent.requestPermission()
             .then(permissionState => {
