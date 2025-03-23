@@ -1,19 +1,19 @@
 /* script.js */
-let imgA;
+let imgA, imgB;
 function preload() {
     imgA = loadImage('mask.png'); // Aの画像 (穴あき絵)
+    imgB = loadImage('background.png'); // Bの画像 (背景用)
 }
 function setup() {
     let canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('canvas-container');
-    noStroke();
     window.addEventListener('deviceorientation', handleGyro);
 }
 function handleGyro(event) {
-    let hueVal = map(event.gamma, -90, 90, 160, 240); // 色相範囲を限定
-    let satVal = 50; // 彩度を抑える
-    let lightVal = 40; // 明度を一定にする
-    background(color(`hsl(${hueVal}, ${satVal}%, ${lightVal}%)`));
+    let hueVal = map(event.gamma, -45, 45, 180, 300, true); // 色相変化を抑える
+    tint(color(`hsl(${hueVal}, 100%, 50%)`)); // 色相変更
+    image(imgB, 0, 0, width, height); // 背景にBの画像を描画
+    noTint(); // 元の色に戻す
     image(imgA, 0, 0, width, height); // 穴あき絵を前面に描画
 }
 document.getElementById('enableGyro').addEventListener('click', function() {
